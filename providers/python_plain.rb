@@ -44,11 +44,11 @@ action :before_migrate do
   end
   if new_resource.requirements
     Chef::Log.info("Installing using requirements file: #{new_resource.requirements}")
-    execute "#{new_resource.pip_path} install --source=#{Dir.tmpdir} -r #{new_resource.requirements}" do
+    execute "#{new_resource.pip_path} install -r #{new_resource.requirements}" do
       command <<-EOC
       export PYTHONIOENCODING=UTF-8 && export LC_ALL=en_US.UTF-8 &&
       #{new_resource.pip_path} install -r #{new_resource.requirements} \
-      --log #{new_resource.pip_log} --source=#{Dir.tmpdir}
+      --log #{new_resource.pip_log}
       EOC
       cwd new_resource.release_path
     end
