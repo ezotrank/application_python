@@ -46,7 +46,7 @@ action :before_migrate do
     Chef::Log.info("Installing using requirements file: #{new_resource.requirements}")
     execute "#{new_resource.pip_path} install -r #{new_resource.requirements}" do
       command <<-EOC
-      export PYTHONIOENCODING=UTF-8 PYCURL_SSL_LIBRARY=nss LC_ALL=en_US.UTF-8 &&
+      export PYTHONIOENCODING=UTF-8 PYCURL_SSL_LIBRARY=openssl LC_ALL=en_US.UTF-8 &&
       #{new_resource.pip_path} install -r #{new_resource.requirements} \
       --log #{new_resource.pip_log}
       EOC
